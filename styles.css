@@ -15,3 +15,16 @@ h2{
 body{
     background-color:#99ff99;
 }
+#Nav-Menu li a{
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+#Nav-Menu li{
+  background-color: aqua;
+  border: 1 px solid blue;
+  display: none;
+}
+#Nav-Menu ul li:first-child{
+display: block;
+}
