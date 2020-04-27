@@ -1,0 +1,30 @@
+h1{
+
+  display: block;
+  font-size: 3em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  background: #33ccff;
+}
+h2{
+    font-size: 2em
+}
+body{
+    background-color:#99ff99;
+}
+#Nav-Menu li a{
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+#Nav-Menu li{
+  background-color: aqua;
+  border: 1 px solid blue;
+  display: none;
+}
+#Nav-Menu ul li:first-child{
+display: block;
+}
