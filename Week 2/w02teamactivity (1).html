@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>W02 Team Activity</title>
+</head>
+<body>
+    <input type="text" id="input" name="input"><br /><br />
+    <input type="text" id="input2" name="input2"><br /><br />
+    <button id="btn">Text Input 1</button><br />
+    <button id="btn2">Nth Triangular Number Input 1</button><br /><br />
+    <button id="add">Input 1 + Input 2</button><br />
+    <button id="subt">Input 1 - Input 2</button><br />
+    <button id="mult">Input 1 * Input 2</button><br />
+    <div id="w02-div"></div>
+
+    <!-- Show Input 1 -->
+    <script>
+        const fillDiv = () => {
+            document.querySelector('#w02-div').textContent = document.getElementById("input").value;
+        }
+        document.querySelector('#btn').addEventListener('click', fillDiv);
+    </script>
+
+    <!-- Nth Triangular Number Function (Sum of numbers up to N) -->
+    <script>
+        const sumFunction = () => {
+            const number = document.getElementById("input").value;
+            let sum = 0;
+            for (var i = 0; i <= number; i++) {
+                sum += i;
+            }
+            //Code for summing an array of numbers
+            //let number = [1,2,3];
+            //number = document.getElementById("input").value;
+            //const sum = number.reduce((a, b) => a + b);
+            document.querySelector('#w02-div').textContent = sum;
+        }
+        document.querySelector('#btn2').addEventListener('click', sumFunction);
+    </script>
+
+    <!-- Get Inputs -->
+    <script>
+        function getNum() {
+            const n1 = Number(document.getElementById("input").value);
+            const n2 = Number(document.getElementById("input2").value);
+            let numbers = [n1, n2];
+            console.log(numbers);
+            return numbers;
+        }
+    </script>
+
+    <!-- Add Function -->
+    <script>
+        const addInputs = (n1, n2) => Number(n1) + Number(n2);
+    </script>
+
+    <!-- Add Subtract -->
+    <script>
+        function subtractInputs(n1, n2) {
+            return n1 - n2;
+        }
+    </script>
+
+    <!-- Add Multiply -->
+    <script>
+        const multiplyInputs = function myFunction(n1, n2) {
+            return n1 * n2;
+        }
+    </script>
+
+    <!-- Total Calculator -->
+    <script>
+        function totalCalc(operation) {
+            const n1 = 0;
+            const n2 = 0;
+            const calcTotal = operation(
+                getNum().splice(0,1).toString(),
+                getNum().splice(1, 1).toString()
+            );
+            console.log(typeof(calcTotal))
+            document.querySelector('#w02-div').textContent = calcTotal;
+        }
+        document.querySelector('#add').addEventListener('click', function(){totalCalc(addInputs)});
+        document.querySelector('#subt').addEventListener('click', function(){totalCalc(subtractInputs)});
+        document.querySelector('#mult').addEventListener('click', function(){totalCalc(multiplyInputs)});
+    </script>
+</body>
+</html>
