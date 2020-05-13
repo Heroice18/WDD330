@@ -3,9 +3,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ison WDD 330 portfolio</title>
+    <style>
+   
+        
+    table{
+        width: 320px;
+        height: 320px;
+    }
+    table td, table tr{
+        width: 33%;
+        height: 33%;
+    }
+
+
+        td:nth-child(1), td:nth-child(2){
+            border-right: 3px solid black;
+            
+            border-color: black;
+           
+        }
+        td:nth-child(1), td:nth-child(2), 
+        td:nth-child(3){
+            border-bottom: 3px solid black;
+            
+            border-color: black;
+           
+        }
+        
+        table tr:last-child td {
+            border-bottom: 0;
+        }
+
+    </style>
+   
     </head>
     <body>
         <h1>Build A Tic Tac Toe</h1>
+        <table>
+            <tr>
+                <td ontouchend="AddValue('1')" id="1"></td>
+                <td ontouchend="AddValue('2')" id="2"></td>
+                <td ontouchend="AddValue('3')" id="3"></td>
+            </tr>
+            <tr>
+                <td ontouchend="AddValue('4')" id="4"></td>
+                <td ontouchend="AddValue('5')" id="5"></td>
+                <td ontouchend="AddValue('6')" id="6"></td>
+            </tr>
+            <tr>
+                <td ontouchend="AddValue('7')" id="7"></td>
+                <td ontouchend="AddValue('8')" id="8"></td>
+                <td ontouchend="AddValue('9')" id="9"></td>
+            </tr>
+            
+        </table>
+    <button onclick="resetBoard()">Reset</button>
 
+    <script>
+        var Pturn = false;
+        function AddValue(idName){
+        if(document.getElementById(idName).innerHTML != "X")
+        {
+            if(document.getElementById(idName).innerHTML != "O")
+            {
+            
+                if(Pturn == false)
+                {
+                    document.getElementById(idName).innerHTML = "X"
+                    Pturn = true
+                }
+                else
+                {
+                    document.getElementById(idName).innerHTML = "O"
+                    Pturn = false   
+                }
+            }
+        }
+        }
+        
+        function resetBoard(){
+            Pturn = false
+            for(var i = 1; i <= 9; i++)
+            {
+                var string = i.toString()
+                
+                document.getElementById(string).textContent = ""
+            }
+        }
+        
+    
+
+    </script>
 
     </body>
