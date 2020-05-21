@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ison WDD 330 portfolio</title>
+    <link type="text/css" rel="stylesheet" href="./styles.css">
+    <script src="ToDo.js"></script>
+  </head>
+  <body>
+    <script src="/Scripts/navigation.js">
+
+    </script>
+      
+    <h1>WDD 330 portfolio</h1>
+    
+
+    <div class="dropdown">
+      <button class="dropbtn">Menu</button>
+      <div class="dropdown-content">
+        <a href="../index.html">Home</a>
+        
+        
+      </div>
+    </div>
+<h2>Todo Application</h2><br>
+
+    <div id="taskForm">
+      <table id = "todoTable">
+        <div style="text-align: center">TODO</div>
+        <tr>
+          <td id = "taskElement">
+            <button id= "markDone" onclick="lineThrough('markDone', 'taskText')">X</button>
+            <span id="taskText">Task</span>
+            <button id="removeTask" onclick="deleteTask('taskElement')">Remove</button></td>
+        </tr>
+        <tr>
+          <td id = "taskElement1">
+            <button id= "markDone1" onclick="lineThrough('markDone1', 'taskText1')">X</button>
+            <span id="taskText1">Task</span>
+            <button id="removeTask1" onclick="deleteTask('taskElement1')">Remove</button></td>
+        </tr>
+        
+      </table>
+    <br>
+<br>
+<div id = "taskFilter">
+  X tasks left 
+  <button onclick="showAll()">All</button>
+  <button onclick="showActive('todoTable')">Active</button>
+  <button onclick="showComplete()">Completed</button>
+</div>
+<br>
+    <div id="taskInput">
+      <input type="text" placeholder = "Task Here" id="addedTask"></input> 
+      <button onclick="addTask('addedTask', 'todoTable')">+</button>
+    </div>
+
+    
+
+</body>
