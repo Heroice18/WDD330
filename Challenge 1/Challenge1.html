@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="./styles.css">
     <script src="ToDo.js"></script>
   </head>
-  <body>
+  <body onload="countTasks()">
     <script src="/Scripts/navigation.js">
 
     </script>
@@ -24,9 +24,9 @@
     </div>
 <h2>Todo Application</h2><br>
 
-    <div id="taskForm">
+    <div id="taskForm" style="text-align: center">
       <table id = "todoTable">
-        <div style="text-align: center">TODO</div>
+        <p id = "TitleTodo">TODO</p>
         <tr>
           <td id = "taskElement">
             <button id= "markDone" onclick="lineThrough('markDone', 'taskText')">X</button>
@@ -44,14 +44,15 @@
     <br>
 <br>
 <div id = "taskFilter">
-  X tasks left 
+  <span id = "totalNum" >X</span> tasks left 
+  <br>
   <button onclick="filter('All')">All</button>
   <button onclick="filter('Active')">Active</button>
   <button onclick="filter('Completed')">Completed</button>
 </div>
 <br>
     <div id="taskInput">
-      <input type="text" placeholder = "Task Here" id="addedTask"></input> 
+      <input type="text" placeholder = "Enter New Task Here" id="addedTask"></input> 
       <button onclick="addTask('addedTask', 'todoTable')">+</button>
     </div>
 

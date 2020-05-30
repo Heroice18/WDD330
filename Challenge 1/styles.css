@@ -16,27 +16,65 @@ body{
     background-color:#99ff99;
 }
 
+#TitleTodo{
+  font-weight: bold;
+  font-size: 1em;
+
+}
 #taskForm{
-  
+  background-color: white;
+  padding-top: 4pt;
+  padding-bottom: 4pt;
+  padding-left: 4pt;
+  padding-right: 4pt;
+}
+
+#taskFilter{
+  border: 2px solid black;
+  background-color: cornflowerblue;
+  width: fit-content;
+  margin-left:auto; 
+    margin-right:auto;
+
 }
 
 #taskinput{
   background-color: chocolate;
 }
 
+#todoTable{
+  
+  margin-left:auto; 
+    margin-right:auto;
+}
+
+#addedTask{
+  border: 2px solid black;
+  box-shadow: 200px;
+}
+
 td{
   
   border: 2px solid black;
-
+  background-color: cornflowerblue;
+  
+  height: max-content;
 }
+
+button{
+  background-color: #BDD3FB;
+  border-radius: 20pt;
+}
+
 #markDone{
 
 float: left;
-
+height: max-content;
 
 }
 #removeTask{
   float: right;
+  height: fit-content;
 }
 
 

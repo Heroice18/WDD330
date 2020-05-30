@@ -13,6 +13,27 @@ var taskArray = [
 ]
 
 
+function countTasks(){
+    var total = 0;
+
+    for(key in taskArray)
+    {
+        console.log("KEY TOP: " + taskArray[key].buttonId);
+        var buttonTxt = document.getElementById(taskArray[key].buttonId).textContent;
+        console.log("button text: " + buttonTxt);
+        if(buttonTxt == "X")
+        {
+            console.log("CHECKING");
+            total = total + 1;
+        }
+
+    }
+
+    document.getElementById("totalNum").innerHTML = total.toString();
+
+}
+
+
 function lineThrough(name, text) {
     var checking = document.getElementById(name).innerHTML;
     if(checking == "X")
@@ -26,7 +47,7 @@ function lineThrough(name, text) {
             document.getElementById(text).style.textDecoration = "none";
         }
 
-    
+        countTasks();
 }
 
 
@@ -63,6 +84,7 @@ function deleteTask(row){
     console.log("FINAL: " + jsonCheck);
 
     document.getElementById(row).remove();
+    countTasks();
 
 }
 
@@ -94,8 +116,13 @@ function addTask(inputText, tablename){
 
     document.getElementById(inputText).innerHTML = "";
     idNumber = idNumber + 1;
+    
+    countTasks();
 
 }
+
+
+
 
 
 function filter(filterType){
