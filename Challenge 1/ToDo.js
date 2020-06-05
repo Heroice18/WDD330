@@ -9,7 +9,6 @@ var taskArray = [
 "buttonId": "markDone1"
 }
 
-
 ]
 
 
