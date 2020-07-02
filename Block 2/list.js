@@ -1,3 +1,16 @@
+var pokemonList = [
+    {
+    "pokemonName": "",
+    "pokemonDex": "",
+    "pokemonSprite": "",
+    "pokemonType": "",
+    "pokemonAbility": "",
+    "pokemonStat": ""
+    }
+
+]
+
+
 function getJSON(url) {
     return fetch(url)
       .then(function(response) {
@@ -353,68 +366,165 @@ function populatePokemonTable(mObject)
     var jsonList = JSON.parse(mObject);
     console.log(typeof(jsonList));
     console.log("Pokemon STRING:" + jsonList );
+
+    var pokemonTableList;
+    var pName = "";
+    var pNum = "";
+    var pSprite = "";
+    var pType = "";
+    var pAbil = "";
+    var pStat = ""; 
+
+
     for(var key in jsonList)
     {
         if(jsonList.hasOwnProperty(key))
         {
-            
+            var baseTotal = 0;
             // console.log("KEY " + jsonList.length);
-             console.log(key + " " +  jsonList[key]);
+             console.log("Start " + key + " " +  jsonList[key]);
             //console.log("Data: " + jsonList[key]);
-
-            
-                //next = jsonList["next"];
-                console.log("NEXT Pokemon: " + jsonList[key]);
-            
-            if(jsonList["name"])
+            if(jsonList["order"])
             {
-                console.log(" Pokemon KEY: " + jsonList["name"]);
+            console.log("S ORDER " + jsonList["order"]);
+                pNum = jsonList["order"];
+                console.log("T NUM " + pNum);
 
-                if(jsonList["sprites"])
+                if(jsonList["types"])
                 {
-                    var spriteList = jsonList["sprites"];
-                    for(var kap in spriteList)
+                    console.log("DO TYPES " + jsonList["types"]);
+                    var typeL = jsonList["types"];
+                    for(var tipe in typeL)
                     {
-                        var frontS = spriteList[kap];
-
-                        if(frontS != null)
+                        console.log("DO TYPES 2" + typeL[tipe]);
+                        var typeIn = typeL[tipe];
+                        for(var lip in typeIn)
                         {
-                            if(frontS.includes("master") )
+                            console.log("DO TYPES 3 " + typeIn[lip]);
+                            var typeDeep = typeIn[lip];
+                            for(var stick in typeDeep)
                             {
-                                if(!frontS.includes("back"))
+                                console.log("DO TYPES 4 " + typeDeep[stick]);
+                                var status = typeDeep[stick];
+                                if(!status.includes("https"))
                                 {
-                                    if(!frontS.includes("shiny"))
+                                    if(pType.includes())
                                     {
-                                        console.log("CHECKA ROON " + frontS);
+                                        pType = pType + " ," + typeDeep[stick];
+                                        console.log("T Type 1 " + pType);
                                     }
-                                
+                                    else{
+                                        pType = typeDeep[stick];
+                                        console.log("T Type 2 " + pType);
+                                    }
+                                    
+                                     
                                 }
                                 
+                           
                             }
                         }
-                        
-                        // console.log("POKEMON KAP: " + frontS);
-
-
-
                     }
+                }
 
-                    if(jsonList["abilities"])
+                if(jsonList["stats"])
+                {
+                console.log("STATs IN" + jsonList["stats"]);
+                    
+                var dive = jsonList["stats"];
+                
+                for(var tea in dive)
+                {
+                    var cup = dive[tea];
+                    console.log("STATs INTO " + dive[tea]);
+                    
+                    for(var time in cup)
                     {
-                        console.log("POKEMON ABILITY " + jsonList["abilities"]);
-                        var abilityList = jsonList["abilities"];
-                        for(var input in abilityList)
-                        {
-                            var hop = abilityList[input];
-                            console.log("ABILITY CHECK: " + hop);
-                            for(var skip in hop)
-                            {
-                                console.log("ABILITY CHECKer: " + skip);
+                        console.log("STATs INTO Deep " + cup[time]);
 
-                                if(hop["slot"])
+                        var cheeck = cup[time];
+                        if(cup[time] != 0)
+                        {
+                            let isnum = /^\d+$/.test(cheeck);
+                            if(isnum)
+                            {
+                                baseTotal = baseTotal + cup[time];
+                                console.log("Adding to Stat Total " + baseTotal);
+                            }
+                        
+                        }
+
+                        var pot = cup[time];
+                        for(var crack in  pot)
+                        {
+                            console.log("STATs INTO Deep Further " + pot[crack]);
+                        }
+                    }
+                }
+                pStat = baseTotal;
+                console.log("T Stat " + pStat);
+
+                if(jsonList["name"])
+                {
+                    console.log(" Pokemon KEY: " + jsonList["name"]);
+                    pName = jsonList["name"];
+                    console.log("T Name " + pName);
+
+                    if(jsonList["sprites"])
+                    {
+                        var spriteList = jsonList["sprites"];
+                        for(var kap in spriteList)
+                        {
+                            var frontS = spriteList[kap];
+    
+                            if(frontS != null)
+                            {
+                                if(frontS.includes("master") )
                                 {
-                                    console.log("SLOTS " + hop["slot"]);
+                                    if(!frontS.includes("back"))
+                                    {
+                                        if(!frontS.includes("shiny"))
+                                        {
+                                            console.log("CHECKA ROON " + frontS);
+                                            pSprite = frontS;
+                                            console.log("T Sprite " + pSprite);
+                                        }
+                                    
+                                    }
+                                    
+                                }
+                            }
+                            
+                            // console.log("POKEMON KAP: " + frontS);
+    
+    
+    
+                        }
+    
+                        if(jsonList["abilities"])
+                        {
+                            console.log("POKEMON ABILITY " + jsonList["abilities"]);
+                            var abilityList = jsonList["abilities"];
+                            for(var input in abilityList)
+                            {
+                                var hop = abilityList[input];
+                                console.log("ABILITY CHECK: " + hop);
+                                for(var skip in hop)
+                                {
+                                    console.log("ABILITY CHECKer: " + skip);
+    
+                                    if(hop["order"])
+                                        {
+                                            console.log("ORDERs " + hop["order"]);
         
+                                        }
+    
+                                        if(hop["types"])
+                                        {
+                                            console.log("TYPES ARE " + hop["types"]);
+        
+                                        }
+    
                                     if(hop["stats"])
                                     {
                                         console.log("STATs " + hop["stats"]);
@@ -424,43 +534,161 @@ function populatePokemonTable(mObject)
                                             console.log("STATs IN " + dive[tea]);
                                         }
         
-                                        if(jsonList["order"])
-                                        {
-                                            console.log("ORDER " + jsonList["order"]);
-        
-                                        }
+                                        
         
                                     }
-                                }
-
-
-                                if(skip == "ability")
-                                {
-                                    var jock = hop[skip];
-                                    console.log("ABILITY JOCK " + jock);
-                                    for(var insert in jock)
-                                    {
-                                        var total = jock[insert];
-                                         if(!total.includes("https"))
-                                        {
-                                            console.log("ABILITY INSERT " + jock[insert]);
     
+    
+                                    if(skip == "ability")
+                                    {
+                                        var jock = hop[skip];
+                                        console.log("ABILITY JOCK " + jock);
+                                        for(var insert in jock)
+                                        {
+                                            var total = jock[insert];
+                                             if(!total.includes("https"))
+                                            {
+                                                console.log("ABILITY INSERT " + jock[insert]);
+                                                pAbil = total;
+                                                console.log("T Ability " + pAbil);
+                                                console.log("ABILITY INSERT 2 " + total);
+                                               
+                                                if(!jock[insert].includes(pName))
+                                                {
+                                                   
+                                                }
+                                                
+        
+                                            }
                                         }
                                     }
                                 }
+                                
                             }
-                            
-                        }
+    
+                       /*
+            Add all the variables to a list
+            */
+           
+            var pString ="";
+            pString = pName + ", " + pNum + ", " + pSprite + ", " + pType + ", "
+            + pAbil + ", " + pStat + ", ";
+            
+            var addPokemon = {pokemonName: pName, pokemonDex:pNum,
+            pokemonSprite: pSprite, pokemonType: pType, pokemonAbility:pAbil,
+            pokemonStat: pStat};
 
+            var newPokemonList = pokemonList;
+
+            newPokemonList.push({"pokemonName": pName,
+            "pokemonDex": pNum,
+            "pokemonSprite": pSprite,
+            "pokemonType": pType,
+            "pokemonAbility": pAbil,
+            "pokemonStat": pStat});
+
+
+            
+
+            console.log("JSON ARRAY: " + newPokemonList);
+
+            //pokemonList.add(addPokemon);
+            // var valuesSoFar = Object.create(null);
+            //     for(var i = 0; i<newPokemonList.length; i++)
+            //     {
+                    
+            //         var value = newPokemonList[i];
+            //         console.log("DUPLICATES 1 " + value);
+            //         if (value in valuesSoFar) {
+            //             console.log("DUPLICATES 2 " + value);
+            //         }
+            //         //valuesSoFar[value] = true;
+            //     }
+
+
+            console.log("AFTER ALL THIS WE GET: " + pString);
+
+
+            var testTable = document.getElementById("typePokemonTable");
+
+            // for (var i = 1, cell; cell = testTable.cells[i]; i++) {
+            //     //iterate through cells
+            //     //cells would be accessed using the "cell" variable assigned in the for loop
+
+            //     console.log("TESTING TABLE HERE: " + i);
+            // }
+            addRow(pName, pNum, pSprite, pType, pAbil, pStat);
+
+
+            }
+           
+            
+    
+                                    
+    
+            }
+            
+                //next = jsonList["next"];
+                console.log("NEXT Pokemon: " + jsonList[key]);
+            
+            
                         
 
                     }
 
                 }          
             }
+
+            
+
+
+
+
         }
         
     }
 }
 
+
+function addRow(tName, tNum, tSprite, tType, tAbil, tStat)
+{
+
+    var tablePokemon = document.getElementById("typePokemonTable");
+    var insertRow = tablePokemon.insertRow();
+    var nameCell = insertRow.insertCell(0);
+    var numberCell= insertRow.insertCell(1);
+    var spriteCell = insertRow.insertCell(2);
+    var typeCell = insertRow.insertCell(3);
+    var abilityCell = insertRow.insertCell(4);
+    var statCell = insertRow.insertCell(5);
+    var checkFav = insertRow.insertCell(6);
+
+    // for(var input in listInfo)
+    // {
+        
+            //console.log("JOJOS " + listInfo);
+            nameCell.innerHTML = tName;
+            numberCell.innerHTML = tNum;
+            var img = document.createElement("IMG");
+
+            img.src = tSprite;
+            
+            spriteCell.appendChild(img);
+
+            typeCell.innerHTML = tType;
+            abilityCell.innerHTML = tAbil;
+            statCell.innerHTML = tStat;
+
+            var checkBox = document.createElement("INPUT");
+            checkBox.type = "checkbox";
+
+            checkFav.appendChild(checkBox);
+
+
+        
+    
+
+
+
+}
 
