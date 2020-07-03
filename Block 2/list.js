@@ -126,6 +126,13 @@ function getJSON(url) {
     var jsonList = JSON.parse(object);
     console.log(typeof(jsonList));
     console.log("STRING:" + jsonList );
+
+
+    var weakTypes = "";
+    var superEff = "";
+    var resistTypes = "";
+    var noEffect = "";
+
     for(var key in jsonList)
     {
         if(jsonList.hasOwnProperty(key))
@@ -160,6 +167,16 @@ function getJSON(url) {
             {
                 
                     console.log("Weak to: " + newT[hey].name);  
+                    if(weakTypes != "")
+                    {
+                        weakTypes = weakTypes + ", " + newT[hey].name;
+                        console.log("WEAK CHECK: " + weakTypes);
+                    }
+                    else
+                    {
+                        weakTypes = newT[hey].name;
+                        console.log("WEAK CHECK 2: " + weakTypes);
+                    }
             }
         }
         if(key == "double_damage_to")
@@ -168,6 +185,16 @@ function getJSON(url) {
             {
                 
                     console.log("Strong to: " + newT[hey].name);  
+                    if(superEff != "")
+                    {
+                        superEff = superEff + ", " + newT[hey].name;
+                        console.log("WEAK CHECK S: " + superEff);
+                    }
+                    else
+                    {
+                        superEff = newT[hey].name;
+                        console.log("WEAK CHECK S2: " + superEff);
+                    }
             }
         }
         if(key == "half_damage_from")
@@ -176,6 +203,7 @@ function getJSON(url) {
             {
                 
                     console.log("Strong against these types: " + newT[hey].name);  
+                    
             }
         }
         if(key == "half_damage_to")
@@ -184,6 +212,16 @@ function getJSON(url) {
             {
                 
                     console.log("Weak against: " + newT[hey].name);  
+                    if(resistTypes != "")
+                    {
+                        resistTypes = resistTypes + ", " + newT[hey].name;
+                        console.log("WEAK CHECK R: " + resistTypes);
+                    }
+                    else
+                    {
+                        resistTypes = newT[hey].name;
+                        console.log("WEAK CHECK R2: " + resistTypes);
+                    }
             }
         }
         if(key == "no_damage_from")
@@ -200,10 +238,23 @@ function getJSON(url) {
             {
                 
                     console.log("No Damage To: " + newT[hey].name);  
+                    if(noEffect != "")
+                    {
+                        noEffect = noEffect + ", " + newT[hey].name;
+                        console.log("WEAK CHECK N: " + noEffect);
+                    }
+                    else
+                    {
+                        noEffect = newT[hey].name;
+                        console.log("WEAK CHECK N2: " + noEffect);
+                    }
             }
         }
         
     }
+
+   
+    addRowType(weakTypes, superEff, resistTypes, noEffect);
 
 
     var moveInfo = jsonList["moves"];
@@ -282,6 +333,15 @@ function populateMoveTable(mObject)
     var jsonList = JSON.parse(mObject);
     console.log(typeof(jsonList));
     console.log("MOVE STRING:" + jsonList );
+
+
+    var nameMove = "";
+    var categoryMove = "";
+    var powerMove = "";
+    var accuracyMove = "";
+    var ppMove = "";
+    var effectMove = "";
+
     for(var key in jsonList)
     {
         if(jsonList.hasOwnProperty(key))
@@ -298,16 +358,19 @@ function populateMoveTable(mObject)
             if(jsonList["name"])
             {
                 console.log(" MOVE KEY: " + jsonList["name"]);
+                nameMove = jsonList["name"];
                 if(jsonList["accuracy"])
                 {
                     console.log(" MOVE Accuracy: " + jsonList["accuracy"]);
-
+                    accuracyMove = jsonList["accuracy"];
                     if(jsonList["pp"])
                     {
                         console.log(" MOVE PP: " + jsonList["pp"]);
+                        ppMove = jsonList["pp"];
                         if(jsonList["power"])
                         {
                             console.log(" MOVE Power: " + jsonList["power"]);
+                            powerMove = jsonList["power"];
                                 
                             if(jsonList["damage_class"])
                             {
@@ -318,7 +381,7 @@ function populateMoveTable(mObject)
                                     if(mob == "name")
                                     {
                                         console.log(" damage name: " + mClass[mob]);
-                                
+                                        categoryMove = mClass[mob];
                                     }
                                 }
                                 
@@ -333,6 +396,7 @@ function populateMoveTable(mObject)
                                                 if(hot == "short_effect")
                                                 {
                                                     console.log("DEEP EFFECT IS: " + deepEffect[hot]);
+                                                    effectMove = deepEffect[hot];
 
                                                 }
                                                
@@ -356,6 +420,10 @@ function populateMoveTable(mObject)
         }
         
     }
+
+    addRowMove(nameMove, categoryMove, powerMove, accuracyMove, ppMove, effectMove);
+
+
 }
 
 
@@ -408,7 +476,7 @@ function populatePokemonTable(mObject)
                                 var status = typeDeep[stick];
                                 if(!status.includes("https"))
                                 {
-                                    if(pType.includes())
+                                    if(pType != "")
                                     {
                                         pType = pType + " ," + typeDeep[stick];
                                         console.log("T Type 1 " + pType);
@@ -549,8 +617,19 @@ function populatePokemonTable(mObject)
                                              if(!total.includes("https"))
                                             {
                                                 console.log("ABILITY INSERT " + jock[insert]);
-                                                pAbil = total;
-                                                console.log("T Ability " + pAbil);
+                                                
+                                                if(pAbil != "")
+                                                {
+                                                    pAbil = pAbil +  ", " + total;
+                                                    console.log("T Ability  1 " + pAbil);
+                                                }
+                                                else{
+                                                    pAbil = total;
+                                                    console.log("T Ability  2 " + pAbil);
+                                                }
+                                                
+                                                
+                                                
                                                 console.log("ABILITY INSERT 2 " + total);
                                                
                                                 if(!jock[insert].includes(pName))
@@ -580,14 +659,15 @@ function populatePokemonTable(mObject)
 
             var newPokemonList = pokemonList;
 
+            
+
+            addRow(pName, pNum, pSprite, pType, pAbil, pStat);
             newPokemonList.push({"pokemonName": pName,
-            "pokemonDex": pNum,
-            "pokemonSprite": pSprite,
-            "pokemonType": pType,
-            "pokemonAbility": pAbil,
-            "pokemonStat": pStat});
-
-
+    "pokemonDex": pNum,
+    "pokemonSprite": pSprite,
+    "pokemonType": pType,
+    "pokemonAbility": pAbil,
+    "pokemonStat": pStat});
             
 
             console.log("JSON ARRAY: " + newPokemonList);
@@ -606,19 +686,47 @@ function populatePokemonTable(mObject)
             //     }
 
 
+            // for(keyP in newPokemonList)
+            // {
+            //     var valueName = newPokemonList[keyP].pokemonName;
+            //     console.log("CHECKING NAME: " + valueName);
+            //     console.log("CHECKING-Name: " + pName);
+            //     if(valueName != null)
+            //     {
+            //         console.log("NOT EMPTY: " );
+            //         if (valueName == pName)
+            //         {
+            //             console.log("Duplicates " + valueName);
+                        
+
+            //         }
+            //         else{
+            
+            //         }
+            //     }
+                
+            // }
+
             console.log("AFTER ALL THIS WE GET: " + pString);
 
 
             var testTable = document.getElementById("typePokemonTable");
-
+var r=0; //start counting rows in table
+while(row=table.rows[r++])
+{
+  var c=0; //start counting columns in row
+  while(cell=row.cells[c++])
+  {
+    cell.innerHTML='[R'+r+'C'+c+']'; // do sth with cell
+  }
+}
             // for (var i = 1, cell; cell = testTable.cells[i]; i++) {
             //     //iterate through cells
             //     //cells would be accessed using the "cell" variable assigned in the for loop
 
             //     console.log("TESTING TABLE HERE: " + i);
             // }
-            addRow(pName, pNum, pSprite, pType, pAbil, pStat);
-
+            
 
             }
            
@@ -648,6 +756,66 @@ function populatePokemonTable(mObject)
         
     }
 }
+
+
+function addRowType(weakTypes, superEff, resistTypes, noEffect)
+{
+
+    var tablePokemon = document.getElementById("typeListTable");
+    var insertRow = tablePokemon.insertRow();
+    var weakCell = insertRow.insertCell(0);
+    var superCell = insertRow.insertCell(1);
+    var resistCell = insertRow.insertCell(2);
+    var noEffCell = insertRow.insertCell(3);
+    
+
+    // for(var input in listInfo)
+    // {
+        
+            //console.log("JOJOS " + listInfo);
+            weakCell.innerHTML = weakTypes;
+            superCell.innerHTML = superEff;
+            
+            resistCell.innerHTML = resistTypes;
+            noEffCell.innerHTML = noEffect;
+            
+}
+
+
+
+
+function addRowMove(nameMove, categoryMove, powerMove, accuracyMove, ppMove, effectMove)
+{
+
+    var tablePokemon = document.getElementById("movePokemonTable");
+    var insertRow = tablePokemon.insertRow();
+    var nameMCell = insertRow.insertCell(0);
+    var categoryCell = insertRow.insertCell(1);
+    var powerCell = insertRow.insertCell(2);
+    var accuracyCell = insertRow.insertCell(3);
+    var ppCell = insertRow.insertCell(4);
+    var effectCell = insertRow.insertCell(5);
+    
+
+    // for(var input in listInfo)
+    // {
+        
+            //console.log("JOJOS " + listInfo);
+            nameMCell.innerHTML = nameMove;
+            categoryCell.innerHTML = categoryMove;
+            powerCell.innerHTML = powerMove;
+            accuracyCell.innerHTML = accuracyMove;
+            ppCell.innerHTML = ppMove;
+            effectCell.innerHTML = effectMove;
+            // Try to insert row
+            var x = document.createElement("BR");
+            tablePokemon.insert(x);
+            
+}
+
+
+
+
 
 
 function addRow(tName, tNum, tSprite, tType, tAbil, tStat)
@@ -683,12 +851,5 @@ function addRow(tName, tNum, tSprite, tType, tAbil, tStat)
             checkBox.type = "checkbox";
 
             checkFav.appendChild(checkBox);
-
-
-        
-    
-
-
-
 }
 
