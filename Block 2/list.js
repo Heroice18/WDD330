@@ -10,6 +10,12 @@ var pokemonList = [
 
 ]
 
+var originalTablePokemon = document.getElementById("typePokemonTable").innerHTML;
+var originalTableTypes = document.getElementById("typeListTable").innerHTML;
+var originalTableMoves = document.getElementById("movePokemonTable").innerHTML;
+
+
+
 
 function getJSON(url) {
     return fetch(url)
@@ -116,6 +122,8 @@ function getJSON(url) {
       else if(text == "Fairy"){typeNum = "18";}
       console.log("CHECK " + typeNum);
       var newURL = base + "/" + typeNum;
+      
+
       getJSON(newURL);
   }
 
@@ -126,6 +134,16 @@ function getJSON(url) {
     var jsonList = JSON.parse(object);
     console.log(typeof(jsonList));
     console.log("STRING:" + jsonList );
+    
+    var retroTablePokemon = document.getElementById("typePokemonTable");
+    retroTablePokemon.innerHTML= originalTablePokemon;
+
+    var retroTableType = document.getElementById("typeListTable");
+    retroTableType.innerHTML= originalTableTypes;
+
+    var retroTableMove = document.getElementById("movePokemonTable");
+    retroTableMove.innerHTML= originalTableMoves;
+
 
 
     var weakTypes = "";
