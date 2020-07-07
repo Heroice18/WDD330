@@ -834,7 +834,7 @@ function addRowMove(nameMove, categoryMove, powerMove, accuracyMove, ppMove, eff
 
 
 
-
+var idNum = 0;
 
 function addRow(tName, tNum, tSprite, tType, tAbil, tStat)
 {
@@ -867,7 +867,145 @@ function addRow(tName, tNum, tSprite, tType, tAbil, tStat)
 
             var checkBox = document.createElement("INPUT");
             checkBox.type = "checkbox";
+            checkBox.setAttribute("id", "checkBox" + idNum);
+            idNum = idNum + 1;
 
             checkFav.appendChild(checkBox);
 }
+
+function grabFromStorage()
+{
+
+}
+
+var idCheck = 0;
+
+function addFavorite()
+{
+    console.log("TAPIN");
+
+    var table = document.getElementById("typePokemonTable");
+    var rows = table.getElementsByTagName("tr");
+    var td = table.getElementsByTagName("td");
+
+    // for(var r = 0; r < table.rows.length; r++)
+    // {
+    //     console.log("TABLE CHECKING: " + table[r].cells[r]);
+    // }
+
+    // for (var i = 0, row; row = table.rows[i]; i++) {
+    //     //iterate through rows
+    //     //rows would be accessed using the "row" variable assigned in the for loop
+    //     console.log("Row CHECKING: " + row[i]);
+    //     for (var j = 0, col; col = row.cells[j]; j++) {
+    //       //iterate through columns
+    //       //columns would be accessed using the "col" variable assigned in the for loop
+    //       console.log("Cell CHECKING: " + col[i]);
+    //     }  
+    // }
+
+
+    //var table = document.getElementById("mytab1");
+    // for (var i = 1, cell; cell = table.cells[i]; i++) {
+    //      //iterate through cells
+    //      //cells would be accessed using the "cell" variable assigned in the for loop
+    //      console.log("CELL CHECKING: " + cell[i]);
+    // }
+
+    var tableLength = table.rows.length;
+    console.log("ASA: " + tableLength);
+
+    for(var j = 0; j <= idNum; j++)
+    {
+        var checkers = document.getElementById("checkBox" + j);
+        if(checkers != null)
+        {
+            if(checkers.checked == true)
+            {
+                console.log("JOPA");
+            }
+        }
+        
+    }
+
+    for(var i = 0; i < tableLength; i++)
+    {
+        var idCheck = 0; 
+        var x = table.rows[i].cells.length;
+        console.log("DOA: " + x);
+
+        if(table.rows[i].cells[6])
+        {
+            //var newID = 
+            var checkers = document.getElementById("checkBox" + idCheck);
+            if(checkers != null)
+            {
+                if(checkers.checked == true)
+                {
+                    console.log("JOPA");
+                }
+            }
+
+            idCheck = idCheck + 1;
+        }
+
+    }
+
+
+
+    // for(var i = 0; i < tableLength; i++)
+    // {
+    //     var idCheck = 0; 
+    //     var x = table.rows[i].cells.length;
+    //     console.log("DOA: " + x);
+
+    //     if(table.rows[i].cells[6])
+    //     {
+    //         console.log("IM IN");
+    //         // if(table.rows[i].cells[6] != null)
+    //         // {
+    //         //     var box = table.rows[i].cells[6];
+    //         //     var doc = document.getElementsByTagName("input");
+
+    //         //     if(doc.checked == false)
+    //         //     {
+    //         //         console.log("CHECKERING: ");
+    //         //     }
+    //         //     var y = table.rows[i].cells[6].checked;
+    //         //     table.rows[i].cells[6].checked = true;
+    //         //     console.log("FOG: " + y);
+    //         // }
+    //         // var y = table.rows[i].cells[6];
+    //         // if(y.checked == true)
+    //         // {
+    //         //     console.log("FOG: " + y);
+    //         // }
+            
+
+            
+    //     }
+
+    // }
+
+
+
+    if (typeof(Storage) !== "undefined") 
+    {
+        // Store
+        localStorage.setItem("lastname", "Sarah");
+        //Retrieve
+        //document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+        console.log("LOCAL STORAGE IS: " + localStorage.getItem("lastname"));
+
+    } 
+    else 
+    {
+        console.log("ERROR WITH: " +  "Sorry, your browser does not support Web Storage...");
+        
+    }
+
+
+}
+
+
 

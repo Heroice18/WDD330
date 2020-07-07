@@ -26,7 +26,7 @@ h1{
 
   #typeTable {
     background-color: #66ccff;
-    width: 80%;
+    width: fit-content;
     margin: auto;
     padding: 3%;
 }
@@ -40,12 +40,14 @@ h1{
     background-color: #33cc33;
     padding: 1%;
     border: solid 1px black;
+    width: fit-content;
 }
 
 #pokemonTypeList{
     background-color: #9966ff;
     padding: 1%;
     border: solid 1px black;
+    width: fit-content;
 }
 
 #favoriteList{
@@ -78,6 +80,7 @@ h1{
     background-color: #ff66ff;
     padding: 1%;
     border: solid 1px black;
+    width: fit-content;
 }
 
 
