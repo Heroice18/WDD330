@@ -9,7 +9,7 @@
 
   </head>
 
-  <body>
+  <body onload="loadStorage()">
     <h1>WDD 330 portfolio</h1>
     <h2>Block 2 Project</h2>
 
@@ -119,15 +119,16 @@
 <br>
 
 <div id="favoritePokemon"><span style="color: white;">Favorites</span>
-  <table>
+  <table id= "pokemonFavoriteList">
     <tr id= "favoriteList">
         <td>Pokemon Name</td>
+        <td>Pokedex Number</td>
         <td>Sprite</td>
         <td>Types</td>
         <td>Abilities</td>
         <td>Base Stat Total</td>
-        <td>More Info</td>
-        <td><button>Unfavorite</button></td>
+        
+        <td><button onclick="removeFavorite()">Unfavorite</button></td>
     </tr>
   </table>
 </div>

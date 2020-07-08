@@ -106,10 +106,14 @@ h1{
 
 #favoritePokemon{
     background-color: #0066ff;
-    width: 85%;
+    width: fit-content;
     margin: auto;
     padding: 1%;
     text-align: center;
+}
+
+#pokemonFavoriteList{
+  background-color: cyan;
 }
 
 

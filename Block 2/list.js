@@ -127,6 +127,7 @@ function getJSON(url) {
       getJSON(newURL);
   }
 
+  var rowIdIdent = 0;
 
   function populateTable(object){
     console.log("OBJ IS: " + object);
@@ -134,7 +135,7 @@ function getJSON(url) {
     var jsonList = JSON.parse(object);
     console.log(typeof(jsonList));
     console.log("STRING:" + jsonList );
-    
+    rowIdIdent = 0;
     var retroTablePokemon = document.getElementById("typePokemonTable");
     retroTablePokemon.innerHTML= originalTablePokemon;
 
@@ -496,7 +497,7 @@ function populatePokemonTable(mObject)
                                 {
                                     if(pType != "")
                                     {
-                                        pType = pType + " ," + typeDeep[stick];
+                                        pType = pType + ", " + typeDeep[stick];
                                         console.log("T Type 1 " + pType);
                                     }
                                     else{
@@ -841,6 +842,8 @@ function addRow(tName, tNum, tSprite, tType, tAbil, tStat)
 
     var tablePokemon = document.getElementById("typePokemonTable");
     var insertRow = tablePokemon.insertRow();
+    insertRow.setAttribute("id", "pokemonId" + rowIdIdent);
+    rowIdIdent = rowIdIdent + 1;
     var nameCell = insertRow.insertCell(0);
     var numberCell= insertRow.insertCell(1);
     var spriteCell = insertRow.insertCell(2);
@@ -868,6 +871,7 @@ function addRow(tName, tNum, tSprite, tType, tAbil, tStat)
             var checkBox = document.createElement("INPUT");
             checkBox.type = "checkbox";
             checkBox.setAttribute("id", "checkBox" + idNum);
+            console.log("CHECK BOX IS: " + checkBox);
             idNum = idNum + 1;
 
             checkFav.appendChild(checkBox);
@@ -914,6 +918,14 @@ function addFavorite()
 
     var tableLength = table.rows.length;
     console.log("ASA: " + tableLength);
+    
+    var favName = "";
+    var favNum = "";
+    var favSprite = "";
+    var favType = "";
+    var favAbil = "";
+    var favStat = "";
+    var favCheck = "";
 
     for(var j = 0; j <= idNum; j++)
     {
@@ -923,10 +935,27 @@ function addFavorite()
             if(checkers.checked == true)
             {
                 console.log("JOPA");
+                var getRowIdentify = document.getElementById("pokemonId" + j);
+                for(var i = 0; i < 7; i++)
+                {
+                    var dataIs = getRowIdentify.cells[i].innerHTML;
+                    console.log("KOAP: " + dataIs);
+                    if(i == 0){favName = dataIs;}
+                    if(i ==1){favNum = dataIs;}
+                    if(i ==2){favSprite = dataIs;}
+                    if(i ==3){favType = dataIs;}
+                    if(i ==4){favAbil = dataIs;}
+                    if(i ==5){favStat = dataIs;}
+                    if(i ==6){favCheck = dataIs;}
+                    
+                }
+
             }
         }
         
     }
+    
+    addFavoritePokemon(favName, favNum, favSprite, favType, favAbil, favStat, favCheck);
 
     for(var i = 0; i < tableLength; i++)
     {
@@ -1007,5 +1036,185 @@ function addFavorite()
 
 }
 
+var favRowId = 0;
+
+function addFavoritePokemon(favoName, favoNum, favoSprite, favoType, favoAbil, favoStat, favoCheck)
+{
+
+    console.log("ROOGA DUO: " + favoSprite);
+    var pokemonStorage = {'Pokemon Name': favoName, 'Pokemon Number': favoNum,
+    'Pokemon Sprite': favoSprite, 'Pokemon Type': favoType, 'Pokemon Ability':favoAbil,
+    'Pokemon Stat': favoStat};
+
+    localStorage.setItem(favoName, JSON.stringify(pokemonStorage));
 
 
+    var favoriteTable = document.getElementById("pokemonFavoriteList");
+    var newRow = favoriteTable.insertRow();
+    newRow.setAttribute("id", "favoriteSelect" + favRowId);
+    favRowId = favRowId + 1;
+    var cellName = newRow.insertCell(0);
+    var cellNum = newRow.insertCell(1);
+    var cellSprite = newRow.insertCell(2);
+    var cellType = newRow.insertCell(3);
+    var cellAbil = newRow.insertCell(4);
+    var cellStat = newRow.insertCell(5);
+    var cellBox= newRow.insertCell(6);
+
+    cellName.innerHTML = favoName;
+    cellNum.innerHTML = favoNum;
+    cellSprite.innerHTML = favoSprite;
+    cellType.innerHTML = favoType;
+    cellAbil.innerHTML = favoAbil;
+    cellStat.innerHTML = favoStat;
+    cellBox.innerHTML = favoCheck;
+}
+
+
+
+var fieldName = "lastname";
+var fieldLength = "length";
+var fieldKey = "key";
+var fieldGItem = "getItem";
+var fieldSItem = "setItem";
+var fieldRemove = "removeItem";
+var fieldClear = "clear";
+
+
+var jsonName = "";
+var jsonNum = "";
+var jsonSprite = "";
+var jsonType = "";
+var jsonAbility = "";
+var jsonStat = "";
+
+var loadID = 0;
+
+function loadStorage()
+{
+    for(var key in localStorage)
+    {
+        console.log("ZEE KEY: " + key);
+        if(key != fieldName)
+        {
+            if(key != fieldLength)
+            {
+                if(key != fieldKey)
+                {
+                    if(key != fieldGItem)
+                    {
+                        if(key!= fieldSItem)
+                        {
+                            if(key != fieldRemove)
+                            {
+                                if(key != fieldClear)
+                                {
+                                    var objectR = localStorage.getItem(key);
+                                    var restoredObject = JSON.parse(objectR);
+                                    console.log("KOCA COLA: " + restoredObject);
+                                    for(var item in restoredObject)
+                                    {
+                                        console.log("DROP IT: " + item);
+                                        console.log("DROP IT ON: " + restoredObject[item]);
+
+                                        if(item == "Pokemon Name"){jsonName = restoredObject[item];}
+                                        if(item == "Pokemon Number"){jsonNum = restoredObject[item];}
+                                        if(item == "Pokemon Sprite"){jsonSprite = restoredObject[item];
+                                        console.log("ROGA: " + jsonSprite);}
+                                        if(item == "Pokemon Type"){jsonType = restoredObject[item];}
+                                        if(item == "Pokemon Ability"){jsonAbility = restoredObject[item];}
+                                        if(item == "Pokemon Stat"){jsonStat = restoredObject[item];}
+                                        
+
+
+                                    }
+                                    var checkboxY = "<input id='favoriteBox" + loadID + "' type='checkbox'> </input>";
+                                    //checkboxY.setAttribute("id", "favoriteBox" + loadID);
+                                    loadID = loadID + 1;
+                                    addFavoritePokemon(jsonName, jsonNum, jsonSprite, jsonType, jsonAbility, jsonStat, checkboxY);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+
+
+function removeFavorite()
+{
+    console.log("I TAPPED IT!");
+
+    var lengthTable = document.getElementById("pokemonFavoriteList");
+    var rowling = lengthTable.getElementsByTagName("tr");
+    var count = 0;
+    for (var i = 0; i < rowling.length; i++) {
+        count++;
+        if (rowling[i].getElementsByTagName("td").length > 0) {
+            count++;
+        }
+    }
+
+
+
+
+    for(var j = 0; j <= count; j++)
+    {
+        console.log("I TAPPED IT Soft!");
+        var checkers = document.getElementById("favoriteBox" + j);
+        if(checkers != null)
+        {
+            console.log("I TAPPED IT Hard!");
+            if(checkers.checked == true)
+            {
+
+                console.log("JOPA KA");
+                var k = j+1;
+                console.log("Checking out J " + j );
+
+                //localStorage.removeItem(name);
+                document.getElementById("pokemonFavoriteList").deleteRow(j);
+                
+                var getRowIdentify = document.getElementById("favoriteSelect" + j);
+
+                for(var i = 0; i < 7; i++)
+                {
+                    var dataIs = getRowIdentify.cells[i].innerHTML;
+                    var nameDel = "";
+                    console.log("KOAP: " + dataIs);
+                    if(i == 0)
+                    {
+                        nameDel = dataIs;
+                        localStorage.removeItem(nameDel);
+                    }
+                    
+                //rowToDelete.deleteRow(j);
+
+                // var getRowIdentify = document.getElementById("pokemonId" + j);
+                // for(var i = 0; i < 7; i++)
+                // {
+                //     var dataIs = getRowIdentify.cells[i].innerHTML;
+                //     console.log("KOAP: " + dataIs);
+                //     if(i == 0){favName = dataIs;}
+                //     if(i ==1){favNum = dataIs;}
+                //     if(i ==2){favSprite = dataIs;}
+                //     if(i ==3){favType = dataIs;}
+                //     if(i ==4){favAbil = dataIs;}
+                //     if(i ==5){favStat = dataIs;}
+                //     if(i ==6){favCheck = dataIs;}
+                    
+                // }
+
+            }
+        }
+        
+    }
+
+}
+
+}
