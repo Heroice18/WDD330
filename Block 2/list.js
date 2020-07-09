@@ -949,19 +949,20 @@ function addFavorite()
                     if(i ==6){favCheck = dataIs;}
                     
                 }
+                addFavoritePokemon(favName, favNum, favSprite, favType, favAbil, favStat, favCheck);
+
 
             }
         }
         
     }
     
-    addFavoritePokemon(favName, favNum, favSprite, favType, favAbil, favStat, favCheck);
-
+   
     for(var i = 0; i < tableLength; i++)
     {
         var idCheck = 0; 
         var x = table.rows[i].cells.length;
-        console.log("DOA: " + x);
+        //console.log("DOA: " + x);
 
         if(table.rows[i].cells[6])
         {
@@ -971,7 +972,7 @@ function addFavorite()
             {
                 if(checkers.checked == true)
                 {
-                    console.log("JOPA");
+                    //console.log("JOPA");
                 }
             }
 
@@ -1018,20 +1019,20 @@ function addFavorite()
 
 
 
-    if (typeof(Storage) !== "undefined") 
-    {
-        // Store
-        localStorage.setItem("lastname", "Sarah");
-        //Retrieve
-        //document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-        console.log("LOCAL STORAGE IS: " + localStorage.getItem("lastname"));
+    // if (typeof(Storage) !== "undefined") 
+    // {
+    //     // Store
+    //     localStorage.setItem("lastname", "Sarah");
+    //     //Retrieve
+    //     //document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+    //     console.log("LOCAL STORAGE IS: " + localStorage.getItem("lastname"));
 
-    } 
-    else 
-    {
-        console.log("ERROR WITH: " +  "Sorry, your browser does not support Web Storage...");
+    // } 
+    // else 
+    // {
+    //     console.log("ERROR WITH: " +  "Sorry, your browser does not support Web Storage...");
         
-    }
+    // }
 
 
 }
@@ -1145,6 +1146,7 @@ function loadStorage()
 }
 
 
+var subRow = 0;
 
 function removeFavorite()
 {
@@ -1154,16 +1156,17 @@ function removeFavorite()
     var rowling = lengthTable.getElementsByTagName("tr");
     var count = 0;
     for (var i = 0; i < rowling.length; i++) {
-        count++;
+        //count++;
         if (rowling[i].getElementsByTagName("td").length > 0) {
             count++;
+            console.log("FAVORITE ROW COUNT: " + count);
         }
     }
 
 
 
 
-    for(var j = 0; j <= count; j++)
+    for(var j = 0; j < count; j++)
     {
         console.log("I TAPPED IT Soft!");
         var checkers = document.getElementById("favoriteBox" + j);
@@ -1178,39 +1181,53 @@ function removeFavorite()
                 console.log("Checking out J " + j );
 
                 //localStorage.removeItem(name);
-                document.getElementById("pokemonFavoriteList").deleteRow(j);
+                
                 
                 var getRowIdentify = document.getElementById("favoriteSelect" + j);
 
                 for(var i = 0; i < 7; i++)
                 {
-                    var dataIs = getRowIdentify.cells[i].innerHTML;
-                    var nameDel = "";
-                    console.log("KOAP: " + dataIs);
-                    if(i == 0)
+                    if(i != null)
                     {
-                        nameDel = dataIs;
-                        localStorage.removeItem(nameDel);
+                        console.log("WHAT IS I: " + i);
+                        var dataIs = getRowIdentify.cells[i].innerHTML;
+                        var nameDel = "";
+                        console.log("KOAPING: " + dataIs);
+                        if(i == 0)
+                        {
+                            nameDel = dataIs;
+                            console.log("dataC: " + nameDel)
+                            localStorage.removeItem(nameDel);
+                            console.log("LETS See K: " + k);
+                            var delRow = k - subRow;
+                            document.getElementById("pokemonFavoriteList").deleteRow(delRow);
+                            subRow = subRow + 1;
+                        }
                     }
                     
-                //rowToDelete.deleteRow(j);
+                }
+                console.log("DELETE ROW: " + k);
 
-                // var getRowIdentify = document.getElementById("pokemonId" + j);
-                // for(var i = 0; i < 7; i++)
-                // {
-                //     var dataIs = getRowIdentify.cells[i].innerHTML;
-                //     console.log("KOAP: " + dataIs);
-                //     if(i == 0){favName = dataIs;}
-                //     if(i ==1){favNum = dataIs;}
-                //     if(i ==2){favSprite = dataIs;}
-                //     if(i ==3){favType = dataIs;}
-                //     if(i ==4){favAbil = dataIs;}
-                //     if(i ==5){favStat = dataIs;}
-                //     if(i ==6){favCheck = dataIs;}
+                
                     
-                // }
+            //     //rowToDelete.deleteRow(j);
 
-            }
+            //     // var getRowIdentify = document.getElementById("pokemonId" + j);
+            //     // for(var i = 0; i < 7; i++)
+            //     // {
+            //     //     var dataIs = getRowIdentify.cells[i].innerHTML;
+            //     //     console.log("KOAP: " + dataIs);
+            //     //     if(i == 0){favName = dataIs;}
+            //     //     if(i ==1){favNum = dataIs;}
+            //     //     if(i ==2){favSprite = dataIs;}
+            //     //     if(i ==3){favType = dataIs;}
+            //     //     if(i ==4){favAbil = dataIs;}
+            //     //     if(i ==5){favStat = dataIs;}
+            //     //     if(i ==6){favCheck = dataIs;}
+                    
+            //     // }
+
+            // }
         }
         
     }
