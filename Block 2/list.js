@@ -10,6 +10,31 @@ var pokemonList = [
 
 ]
 
+var pokemonTableFilter = [
+    {
+        "Name":"",
+        "Pokedex":"",
+        "Sprite":"",
+        "Type":"",
+        "Abilities":"",
+        "Base Stat":""
+
+    }
+]
+
+var moveTableFilter = [
+    {
+        "Name":"",
+        "Category":"",
+        "Power":"",
+        "Accuracy":"",
+        "PP":"",
+        "Effect":""
+    }
+
+]
+
+
 var originalTablePokemon = document.getElementById("typePokemonTable").innerHTML;
 var originalTableTypes = document.getElementById("typeListTable").innerHTML;
 var originalTableMoves = document.getElementById("movePokemonTable").innerHTML;
@@ -400,6 +425,7 @@ function populateMoveTable(mObject)
                                     if(mob == "name")
                                     {
                                         console.log(" damage name: " + mClass[mob]);
+                                        
                                         categoryMove = mClass[mob];
                                     }
                                 }
@@ -1235,3 +1261,189 @@ function removeFavorite()
 }
 
 }
+
+
+function filterSelection(typeBut, tableType)
+{
+
+    if(typeBut == "alpha"){sortAlpha(tableType);}
+    if(typeBut == "ability"){sortPokeTable(typeBut);}
+    if(typeBut == "stat"){sortPokeTable(typeBut);}
+    if(typeBut == "category"){sortMoveTable(typeBut);}
+    if(typeBut == "power"){sortMoveTable(typeBut);}
+    if(typeBut == "accuracy"){sortMoveTable(typeBut);}
+
+}
+
+function sortAlpha(tableName)
+{
+    console.log("ENTERED ALPHA");
+
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById(tableName);
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("TD")[0];
+        y = rows[i + 1].getElementsByTagName("TD")[0];
+        // Check if the two rows should switch place:
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+
+
+}
+
+function sortPokeTable(filterType)
+{
+    console.log("ENTERED POKEMON");
+
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("typePokemonTable");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        if(filterType == "ability")
+        {
+            console.log("ABILITY ENTERED");
+            x = rows[i].getElementsByTagName("TD")[4];
+            y = rows[i + 1].getElementsByTagName("TD")[4];
+            // Check if the two rows should switch place:
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+            }
+        }
+        
+        if(filterType == "stat")
+        {
+            x = rows[i].getElementsByTagName("TD")[5];
+            y = rows[i + 1].getElementsByTagName("TD")[5];
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+            }
+        }
+
+
+
+
+
+        
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+}
+
+function sortMoveTable(moveFilterType)
+{
+    console.log("ENTERED MOVES");
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("movePokemonTable");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        if(moveFilterType == "category")
+        {
+            console.log("ABILITY ENTERED");
+            x = rows[i].getElementsByTagName("TD")[1];
+            y = rows[i + 1].getElementsByTagName("TD")[1];
+            // Check if the two rows should switch place:
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+            }
+        }
+        
+        if(moveFilterType == "power")
+        {
+            x = rows[i].getElementsByTagName("TD")[2];
+            y = rows[i + 1].getElementsByTagName("TD")[2];
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+            }
+        }
+
+
+        if(moveFilterType == "accuracy")
+        {
+            x = rows[i].getElementsByTagName("TD")[3];
+            y = rows[i + 1].getElementsByTagName("TD")[3];
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+            }
+        }
+
+
+        
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+}
+
+
+
+
+
+
+

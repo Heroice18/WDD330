@@ -64,6 +64,25 @@
     </table>
   </div>
   <br>
+ <div id="filter"><span>Filter by Pokemon</span><br>
+  <table id="filterSelections">
+    <tr>
+      <td  id= "pokemonFilter"></td>
+      
+    </tr>
+    <tr >
+      <td id= "pokemonFilter">
+        <button onclick="filterSelection('alpha','typePokemonTable')">A-Z</button>
+        <button onclick="filterSelection('ability','typePokemonTable')">Abilities</button>
+        <button onclick="filterSelection('stat','typePokemonTable')">Base Stat</button>
+      </td>
+      
+      </td>
+    </tr>
+  </table>
+</div>
+  <br>
+
   <div id="pokemonTypeList">
     <table id="typePokemonTable">
       <tr id="typeList">
@@ -78,6 +97,27 @@
       </tr>
     </table>
   </div>
+<br>
+
+
+  <div id="filter"><span>Filter by Move</span><br>
+    <table id="filterSelections">
+      <tr>
+        
+        <td id="moveFilter"></td>
+      </tr>
+      <tr >
+        
+        <td id="moveFilter">
+          <button onclick="filterSelection('alpha','movePokemonTable')">A-Z</button>
+          <button onclick="filterSelection('category','movePokemonTable')">Category</button>
+          <button onclick="filterSelection('power','movePokemonTable')">Power</button>
+          <button onclick="filterSelection('accuracy','movePokemonTable')">Accuracy</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+<br>
   <br>
   <div id="pokemonMoves">
     <table id = "movePokemonTable">
@@ -94,27 +134,7 @@
 </div>
 <br>
 <br>
-<div id="filter"><span>Filter</span><br>
-  <table id="filterSelections">
-    <tr>
-      <td  id= "pokemonFilter">Filter by Pokemon</td>
-      <td id="moveFilter">Filter by Move</td>
-    </tr>
-    <tr >
-      <td id= "pokemonFilter">
-        <button>A-Z</button>
-        <button>Abilities</button>
-        <button>Base Stat</button>
-      </td>
-      <td id="moveFilter">
-        <button>A-Z</button>
-        <button>Category</button>
-        <button>Power</button>
-        <button>Accuracy</button>
-      </td>
-    </tr>
-  </table>
-</div>
+
 <br>
 <br>
 
